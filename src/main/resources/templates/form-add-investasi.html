@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Investasi</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+    <div>
+<!--        jika table tidak support banyak form, cari tahu solusi biasa-->
+        <p th:text="'investasi untuk '+${investor.namaInvestor}"></p>
+        <table style="border: 1px solid black;">
+            <thead>
+            <tr>
+                <th>Nama Perusahaan</th>
+                <th>Total Penghasilan</th>
+                <th>Net Profit</th>
+                <th>Tahun</th>
+                <th>Periode Fiskal</th>
+                <th>Jumlah Investasi(RP)</th>
+                <th>Aksi</th>
+            </tr>
+            </thead>
+            <tbody th:if="!${#lists.isEmpty(listCompany)}">>
+                <th:block th:each="company : ${listCompany}">
+                    <tr>
+                        <td th:text="${company.nama}"></td>
+                        <td th:text="${company.saldo_perusahaan}"></td>
+                        <td>net profit disini</td>
+<!--                        <td>placeholder netprofitr</td>-->
+<!--                        <td th:text="${company.netProfit}"></td>-->
+                        <td>
+                            <form th:action="@{/investasi/add}" th:object="${investasi}" method="post">
+<!--                                apakah butuh th field?-->
+                                <input type="hidden" th:value="${investor.uuid}" name="idInvestor" />
+                                <input type="hidden" th:value="${company.uuid}" name="idPerusahaan" />
+                                <!--                        inget tambahkan attribute investor-->
+<!--                                <td>-->
+                                <input type="number" th:field="*{tahunFiskal}" placeholder="Tahun" />
+<!--                                </td>-->
+<!--                                <td>-->
+                                <select th:field="*{periodeFiskal}">
+                                    <option th:value="1">1</option>
+                                    <option th:value="2">2</option>
+                                    <option th:value="3">3</option>
+                                    <option th:value="4">4</option>
+                                </select>
+<!--                                </td>-->
+<!--                                <td>-->
+
+                                <input type="number" th:field="*{jumlahInvestasi}" placeholder="Jumlah Investasi(RP)" />
+<!--                                </td>-->
+<!--                                <td>-->
+
+                                <button type="submit">Submit</button>
+<!--                                </td>-->
+
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+
+            </tbody>
+            <tbody th:if="${#lists.isEmpty(listCompany)}">
+            <tr>
+                <td colspan=7>Belum ada Perusahaan yang dibuat</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

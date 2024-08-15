@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Project</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <br>
+       
+
+        <div class="card m-4 p-4">
+            <div class="card-body">
+                <div class="justify-content-center">
+                    <h1 th:if="${isFinished}" style="text-align: center">Daftar Project Selesai</h1>
+                    <h1 th:unless="${isFinished}" style="text-align: center">Daftar Project Berjalan</h1>
+                    <br>
+
+
+                    <th:block th:unless="${isFinished}">
+                        <a class="btn btn-success" href="/projects/add"> + Tambah Project</a>
+                        <a class="btn btn-secondary" href="/projects?isFinished=true">
+                            List Project Selesai
+                        </a>
+                    </th:block>
+                    <a th:if="${isFinished}" class="btn btn-secondary" href="/projects">List Project Berjalan</a>
+                    <a class="btn btn-info" href="/">Beranda</a>
+                    <br><br>
+
+                    <div th:if="*{listProject.size() != 0}" class="card">
+                        <div class="card-body">
+                            <br>
+                            <table class="table" id="daftar_project">
+                                <thead style="background-color: #e7e6ff">
+                                    <tr style="text-align: center">
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Perusahaan</th>
+                                        <th>Est. Profit</th>
+                                        <th th:if="${isFinished}">Tanggal Selesai</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style="text-align: center">
+                                    <tr th:each="project, iterationStatus : ${listProject}"
+                                        th:style="${iterationStatus.even} ? 'font-weight:bold; background-color: #F5F5F5 ;'">
+                                        <td th:text="${iterationStatus.count}"></td>
+                                        <td th:text="${project.nama}"></td>
+                                        <td th:text="${project.company.nama}"></td>
+                                        <td th:text="${project.estimatedProfit}"></td>
+                                        <td th:if="${isFinished}" th:text="${project.tanggalSelesai}"></td>
+                                        <td>
+                                            <th:block th:if="${isFinished}">
+                                                <a class="btn btn-primary flex-fill mx-2"
+                                                    th:href="@{/projects/} + ${project.uuid}">
+                                                    Detail
+                                                </a>
+                                            </th:block>
+                                            <th:block th:unless="${isFinished}">
+                                                <div class="d-flex">
+                                                    <a class="btn btn-primary flex-fill mx-2"
+                                                        th:href="@{/projects/} + ${project.uuid}">
+                                                        Ubah
+                                                    </a>
+                                                    <form class="flex-fill mx-2"
+                                                        th:action="@{'/projects/' + ${project.uuid} + ':finish'}"
+                                                        method="POST">
+                                                        <button class="btn btn-success w-100">Selesai</button>
+                                                    </form>
+                                                </div>
+                                            </th:block>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div th:unless="*{listProject.size() != 0}">
+                            <br><br>
+                            <h2 th:text="'Tidak ada Project'" style="color:red; text-align: center"></h2>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+
+</html>

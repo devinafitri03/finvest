@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <br>
+        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <div class="card m-4 p-4">
+            <div class="card-body">
+                <div class="justify-content-center">
+                    <h2>Dashboard</h2>
+                    <br>
+
+                    <h4>Net Profit</h4>
+                    <div style="width: 800px;"><canvas id="net-profit-chart"></canvas></div>
+                    <br>
+
+                    <h4>Est. Profit Perusahaan</h4>
+                    <table th:if="*{listCompany.size() != 0}" class="table">
+                        <thead style="background-color: #e7e6ff">
+                            <tr style="text-align: center">
+                                <th>No</th>
+                                <th>Perusahaan</th>
+                                <th>Est. Profit</th>
+                            </tr>
+                        </thead>
+
+                        <tbody style="text-align: center">
+                            <tr th:each="company, iterationStatus : ${listCompany}"
+                                th:style="${iterationStatus.even} ? 'font-weight:bold; background-color: #F5F5F5 ;'">
+                                <td th:text="${iterationStatus.count}"></td>
+                                <td th:text="${company.nama}"></td>
+                                <td th:text="${company.getEstimatedProfitOfUnfinishedProject}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <h4>Perusahaan dengan Net Profit menurun</h4>
+                    <table th:if="*{listCompany.size() != 0}" class="table">
+                        <thead style="background-color: #e7e6ff">
+                            <tr style="text-align: center">
+                                <th>No</th>
+                                <th>Perusahaan</th>
+                            </tr>
+                        </thead>
+
+                        <tbody style="text-align: center">
+                            <tr th:each="company, iterationStatus : ${listCompany}"
+                                th:style="${iterationStatus.even} ? 'font-weight:bold; background-color: #F5F5F5 ;'">
+                                <td th:text="${iterationStatus.count}"></td>
+                                <td th:text="${company.nama}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <a class="btn btn-info" href="/">Beranda</a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+
+    <script>
+        // const data = [
+        //     { year: 2010, count: 10 },
+        //     { year: 2011, count: 20 },
+        //     { year: 2012, count: 15 },
+        //     { year: 2013, count: 25 },
+        //     { year: 2014, count: 22 },
+        //     { year: 2015, count: 30 },
+        //     { year: 2016, count: 28 },
+        // ];
+
+        const netProfitData = [
+            {
+                company: "Perusahaan A",
+                data: [
+                    { year: "1-2022", profit: 1000000 },
+                    { year: "2-2022", profit: 1200000 },
+                    { year: "3-2022", profit: 1600000 },
+                    { year: "4-2022", profit: 800000 },
+                    { year: "1-2023", profit: 1400000 },
+                    { year: "2-2023", profit: 1900000 },
+                ]
+            },
+            {
+                company: "Perusahaan B",
+                data: [
+                    { year: "1-2022", profit: 1200000 },
+                    { year: "2-2022", profit: 1500000 },
+                    { year: "3-2022", profit: 1300000 },
+                    { year: "4-2022", profit: 1000000 },
+                    { year: "1-2023", profit: 1800000 },
+                    { year: "2-2023", profit: 2000000 },
+                ]
+            },
+            {
+                company: "Perusahaan C",
+                data: [
+                    { year: "1-2022", profit: 500000 },
+                    { year: "2-2022", profit: 900000 },
+                    { year: "3-2022", profit: 1200000 },
+                    { year: "4-2022", profit: 1000000 },
+                    { year: "1-2023", profit: 700000 },
+                    { year: "2-2023", profit: 1400000 },
+                ]
+            },
+        ]
+
+        const yearList = [
+            "1-2022",
+            "2-2022",
+            "3-2022",
+            "4-2022",
+            "1-2023",
+            "2-2023",
+        ]
+
+
+        new Chart(
+            document.getElementById('net-profit-chart'),
+            {
+                type: 'line',
+                data: {
+                    labels: yearList,
+                    datasets: netProfitData.map((netProfitData) => {
+                        return {
+                            label: netProfitData.company,
+                            data: netProfitData.data.map((data) => {
+                                return data.profit
+                            }),
+                        }
+                    })
+                },
+            }
+        );
+    </script>
+</body>
+
+</html>

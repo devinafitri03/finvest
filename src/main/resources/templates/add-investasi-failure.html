@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investor Setup</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<!--base-->
+<!--left side(create investor group)akan create investor then link to user-->
+<!--        This is the first division to have a vertical alignment.-->
+        <div class="row justify-content-center">
+<!--            <p th:text="'Investor Firm dengan nama [ '+'${#investor.namaInvestor}'+' ]'"></p>-->
+            <p>GAGAL  pada perusahaan </p>
+            <p th:text="${investasi.idPerusahaan.nama}"></p> <br>
+            <a class="btn btn-primary" href="/investasi">Balik ke View</a>
+
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

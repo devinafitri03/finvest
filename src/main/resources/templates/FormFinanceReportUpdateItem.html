@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title> Update Item - Finance Report</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+  </head>
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+      <div class="card m-4 p-4">
+        <div class="card-body">
+          <h2>Update Item Finance Report</h2>
+          <br />
+
+          <form th:action="@{/finance/update}" method="post">
+            <!-- Hidden field for the item ID -->
+            <input
+              type="hidden"
+              th:name="*{proyek.proyek}"
+              th:value="${proyek.proyek}"
+            />
+
+            <div class="mb-3">
+              <label for="periode_fiskal" class="form-label"
+                >Periode Fiskal</label
+              >
+              <input
+                id="periode_fiskal"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.periode_fiskal}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="tahun_fiskal" class="form-label">Tahun Fiskal</label>
+              <input
+                id="tahun_fiskal"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.tahun_fiskal}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="total_revenue" class="form-label"
+                >Total Revenue</label
+              >
+              <input
+                id="total_revenue"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.total_revenue}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="operating_expense" class="form-label"
+                >Operating Expense</label
+              >
+              <input
+                id="operating_expense"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.operating_expense}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="tax" class="form-label">Tax</label>
+              <input
+                id="tax"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.tax}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="net_profit" class="form-label">Net Profit</label>
+              <input
+                id="net_profit"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.net_profit}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="jumlah_investor" class="form-label"
+                >Jumlah Investor</label
+              >
+              <input
+                id="jumlah_investor"
+                required
+                class="form-control"
+                type="number"
+                th:field="*{proyek.jumlah_investor}"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <br /><br />
+            <a class="btn btn-primary" href="/">Home</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>

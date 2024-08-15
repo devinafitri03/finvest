@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lihat Investasi</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<p th:text="'halaman investasi untuk '+${investor.namaInvestor}"></p>
+<!--buat table yang telah terinvestasi, jika none, message untuk buat baru. buat add investor di bottom page-->
+<table style="border: 1px solid black;">
+    <thead>
+    <tr>
+        <th>Tahun/Periode Fiskal</th>
+        <th>Nama Perusahaan</th>
+        <th>Jumlah Investasi(RP)</th>
+        <th>Net Profit</th>
+        <th>Total Penghasilan</th>
+    </tr>
+    </thead>
+    <tbody th:if="!${#lists.isEmpty(listInvestasi)}">>
+    <th:block th:each="investasi : ${listInvestasi}">
+        <tr>
+<!--            cek apakah field benar, dan apakah butuh double dot dengan object crossover-->
+            <td th:text="${investasi.tahunFiskal}+'/'+${investasi.periodeFiskal}"></td>
+            <td th:text="${investasi.idPerusahaan.nama}"></td>
+            <td th:text="${investasi.jumlahInvestasi}"></td>
+
+            <!--            <td th:text="${net profit disini"></td>-->
+            <!--            <td th:text="${total penghasilan disini"></td>-->
+
+        </tr>
+    </th:block>
+
+    </tbody>
+    <tbody th:if="${#lists.isEmpty(listInvestasi)}">
+    <tr>
+        <td colspan=7>Belum ada Investasi yang dibuat</td>
+    </tr>
+    </tbody>
+</table>
+<a class="btn btn-primary" href="/investasi/add">Add Investasi Baru</a>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
+
+</body>
+</html>

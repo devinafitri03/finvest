@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Update User</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Update User</h2>
+                <br>
+                <form th:action="@{/user/update/}" th:object="${user}" method="POST">
+                    <input type="hidden" th:field="*{uuid}" />
+
+                    Nama User: <br>
+                    <input th:field="*{nama}" class="form-control" type="text" name="nama"/>
+                    <br>
+
+                    Username User: <br>
+                    <input th:field="*{username}" class="form-control" type="text" name="username"/>
+                    <br>
+
+                    Email User: <br>
+                    <input th:field="*{email}" class="form-control" type="text" name="email"/>
+                    <br>
+
+                    Password User: <br>
+                    <input class="form-control" type="text" name="password"/>
+                    <br>
+
+                    Perusahaan User: <br>
+                    <select th:readonly="${user.company.nama}" name="company" class="form-control">
+                        <option selected value="">--Pilih Perusahaan--</option>
+                        <option th:each="company : ${listCompany}" th:value="${company.uuid}"
+                            th:text="${company.nama}">
+                        </option>
+                    </select>
+                    <br>
+
+                    Role User: 
+                    <select name="peran" class="form-control">
+                        <option selected value="">--Pilih Role--</option>
+                        <option th:each="role : ${listRole}"
+                                th:value="${role.uuid}"
+                                th:text="${role.nama}">
+                            </option>
+                    </select>
+                    <br>
+
+                    Is Main Ceo : 
+                    <select th:field="*{isMainCeo}" name="isMainCeo">
+                        <option value="0">Bukan Ceo</option>
+                        <option value="1">Ceo</option>
+                    </select>
+                    <br> <br>
+
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

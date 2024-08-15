@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Daftar Perusahaan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"
+    />
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+      <br />
+      <div
+        class="alert alert-success"
+        role="alert"
+        th:text="${success}"
+        th:if="${success}"
+      ></div>
+      <div
+        class="alert alert-danger"
+        role="alert"
+        th:text="${error}"
+        th:if="${error}"
+      ></div>
+      <div class="card m-4 p-4">
+        <div class="card-body">
+          <div class="justify-content-center">
+            <h1 style="text-align: center">Daftar Perusahaan</h1>
+            <br />
+            <a class="btn btn-success" href="/company/add">
+              + Tambah Perusahaan</a
+            >
+            <a class="btn btn-info" href="/">Beranda</a>
+            <br /><br />
+
+            <div th:if="*{listCompany.size() != 0}" class="card">
+              <div class="card-body">
+                <br />
+                <table class="table" id="daftar_company">
+                  <thead style="background-color: #e7e6ff">
+                    <tr style="text-align: center">
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Tahun Berdiri</th>
+                      <th>Perusahaan Induk</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody style="text-align: center">
+                    <tr
+                      th:each="company, iterationStatus : ${listCompany}"
+                      th:style="${iterationStatus.even} ? 'font-weight:bold; background-color: #F5F5F5 ;'"
+                    >
+                      <td th:text="${iterationStatus.count}"></td>
+                      <td th:text="${company.nama}"></td>
+                      <td th:text="${company.tahun_berdiri}"></td>
+                      <td th:text="${company.perusahaan_induk}"></td>
+                      <td>
+                        <a
+                          class="btn btn-primer"
+                          th:href="@{/company/update/} + ${company.uuid}"
+                          >Update</a
+                        >
+                        <a
+                          class="btn btn-info"
+                          th:href="@{/company/view/} + ${company.uuid}"
+                          >Detail</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div th:unless="*{listCompany.size() != 0}">
+                <br /><br />
+                <h2
+                  th:text="'Tidak ada Perusahaan'"
+                  style="color: red; text-align: center"
+                ></h2>
+              </div>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>

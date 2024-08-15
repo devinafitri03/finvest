@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>All Reports - Finance Report</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"
+  />
+  <script
+    type="text/javascript"
+    charset="utf8"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"
+  ></script>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    type="text/css"
+  />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+      <div class="card m-4 p-4">
+        <div class="card-body">
+          <div class="justify-content-center">
+            <h2>List Proyek</h2>
+            <br />
+            <div th:each="proyek : ${listProyek}">
+              <p th:text="'Proyek UUID: ' + ${proyek.proyek}"></p>
+              <br /><br />
+
+              <a
+                class="btn btn-secondary"
+                th:href="@{/finance/view/{id}(id=${proyek.proyek})}"
+              >
+                View Details
+              </a>
+
+              <hr />
+            </div>
+            <br />
+            <div class="col"></div>
+            <a class="btn btn-primary" th:href="@{/finance/add}"
+              >Add New Proyek</a
+            >
+            <!-- TODO: handle error for jumlah investor is null -->
+            <br /><br />
+            <a class="btn btn-primary" href="/">Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+  
+</html>

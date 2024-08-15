@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <title>Detail Company</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width-device-width, initial-scale-1.0" />
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Detail Perusahaan</title>
+    <style>
+      .detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .back {
+        padding: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="detail">
+      <br />
+      <h3>Informasi Perusahaan</h3>
+      <br />
+      <h6 th:text="'Nama Perusahaan           : ' + ${company.nama}"></h6>
+      <h6
+        th:text="'Tahun Berdiri             : ' + ${company.tahun_berdiri}"
+      ></h6>
+      <h6
+        th:text="'Kategori Perusahaan       : ' + ${company.kategori.nama}"
+      ></h6>
+      <h6
+        th:text="'Subkategori Perusahaan    : ' + ${company.subkategori.nama}"
+      ></h6>
+      <h6
+        th:text="'Perusahaan Induk          : ' + ${company.perusahaan_induk}"
+      ></h6>
+      <h6
+        th:text="'Saldo Perusahaan          : ' + ${company.saldo_perusahaan}"
+      ></h6>
+      <h6
+        th:text="'Status                    : ' + ${company.statusPerusahaan}"
+      ></h6>
+    </div>
+    <div class="back">
+      <a class="btn btn-primary" href="/company">Kembali</a>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
+    <meta name="viewport" content="width-device-width, initial-scale-1.0" />
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Detail Perusahaan</title>
+    <style>
+      .detail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .back {
+        padding: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="detail">
+      <br />
+      <h3>Informasi Perusahaan</h3>
+      <br />
+      <h6 th:text="'Nama Perusahaan           : ' + ${company.nama}"></h6>
+      <h6
+        th:text="'Tahun Berdiri             : ' + ${company.tahun_berdiri}"
+      ></h6>
+      <h6
+        th:text="'Kategori Perusahaan       : ' + ${company.kategori.nama}"
+      ></h6>
+      <h6
+        th:text="'Subkategori Perusahaan    : ' + ${company.subkategori.nama}"
+      ></h6>
+      <h6
+        th:text="'Perusahaan Induk          : ' + ${company.perusahaan_induk}"
+      ></h6>
+      <h6
+        th:text="'Saldo Perusahaan          : ' + ${company.saldo_perusahaan}"
+      ></h6>
+      <h6
+        th:text="'Status                    : ' + ${company.statusPerusahaan}"
+      ></h6>
+    </div>
+    <div class="back">
+      <a class="btn btn-primary" href="/company">Kembali</a>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>

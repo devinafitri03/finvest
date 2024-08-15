@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Update Company</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+        <div class="card m-4 p-4">
+            <div class="card-body">
+                <div class="justify-content-center">
+                    <h2>Update Perusahaan</h2>
+                    <br>
+                    <form th:action="@{/company/update}" th:object="${company}" method="POST"
+                        onsubmit="return validatePassword()">
+
+                        <input type="hidden" th:field="*{uuid}" />
+
+                            Kode Perusahaan: <br>
+                            <input class="form-control" type="number" name="uuid"/>
+                            <br>
+         
+                            Nama Perusahaan: <br>
+                            <input required th:field="*{nama}" class="form-control" type="text" name="nama"/>
+                            <br>
+         
+                            Tahun Berdiri: <br>
+                            <input required th:field="*{tahun_berdiri}" th:readonly="${company.tahun_berdiri}" class="form-control" type="text" name="tahun_berdiri"/>
+                            <br>
+         
+                            Kategori Bisnis: 
+                            <select th:field="*{kategori}" name="kategori" class="form-control">
+                                <option selected value="">--Pilih Kategori--</option>
+                                <option th:each="kategori : ${listKategori}"
+                                        th:value="${kategori.uuid}"
+                                        th:text="${kategori.nama}">
+                                </option>
+                            </select>
+                            <br>
+         
+                            Subkategori Bisnis: <br>
+                            <select th:field="*{subkategori}" name="subkategori" class="form-control">
+                                <option selected value="">--Pilih Subkategori--</option>
+                                <option th:each="subkategori : ${listSubkategori}"
+                                        th:value="${subkategori.uuid}"
+                                        th:text="${subkategori.nama}">
+                                    </option>
+                            </select>
+                            <br>
+         
+                            Perusahaan Induk: <br>
+                            <input th:field="*{perusahaan_induk}" class="form-control" type="number" name="perusahaan_induk" />
+                            <br>
+         
+                            Saldo Perusahaan: <br>
+                            <input required th:field="*{saldo_perusahaan}" th:readonly="${company.saldo_perusahaan}" class="form-control" type="number" name="saldo_perusahaan" />
+                            <br>
+        
+                            Status Perusahaan : 
+                            <select th:field="*{statusPerusahaan}" name="statusPerusahaan">
+                                <option value="1">Active</option>
+                                <option value="2">Merged</option>
+                                <option value="3">Bankrupt</option>
+                            </select>
+                            <br><br>
+         
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <a class="btn btn-primary" href="/company">Kembali</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+
+</html>

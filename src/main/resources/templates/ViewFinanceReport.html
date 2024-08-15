@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Detail Finance Report</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  </head>
+  <body>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+    <div class="container">
+      <div class="card m-4 p-4">
+        <div class="card-body">
+          <div class="justify-content-center">
+            <h2>Detail Report</h2>
+            <br />
+            <div th:if="${proyek != null}">
+              <p
+                th:if="${proyek.proyek != null}"
+                th:text="'Kode Proyek: ' + ${proyek.proyek}"
+              ></p>
+              <p
+                th:if="${proyek.periode_fiskal != null}"
+                th:text="'Periode Fiskal: ' + ${proyek.periode_fiskal}"
+              ></p>
+              <p
+                th:if="${proyek.tahun_fiskal != null}"
+                th:text="'Tahun Fiskal: ' + ${proyek.tahun_fiskal}"
+              ></p>
+              <p
+                th:if="${proyek.total_revenue != null}"
+                th:text="'Total Revenue: ' + ${proyek.total_revenue}"
+              ></p>
+              <p
+                th:if="${proyek.operating_expense != null}"
+                th:text="'Operating Expense: ' + ${proyek.operating_expense}"
+              ></p>
+              <p
+                th:if="${proyek.tax != null}"
+                th:text="'Tax: ' + ${proyek.tax}"
+              ></p>
+              <p
+                th:if="${proyek.net_profit != null}"
+                th:text="'Net Profit: ' + ${proyek.net_profit}"
+              ></p>
+            </div>
+            <div th:if="${proyek == null}">
+              <p>Tidak ada proyek yang pernah diselesaikan</p>
+            </div>
+            <div class="col">
+              <!-- Additional content or columns can be added here -->
+            </div>
+            <br />
+
+            <a class="btn btn-primary" th:href="@{/finance}">Kembali</a>
+            <form
+              th:action="@{/finance/delete/{uuid}(uuid=${proyek.proyek})}"
+              method="post"
+              style="display: inline"
+            >
+              <input type="hidden" name="_method" value="delete" />
+              <button type="submit" class="btn btn-danger">
+                Delete Proyek
+              </button>
+            </form>
+            <a
+              class="btn btn-primary"
+              th:href="@{/finance/update/{uuid}(uuid=${proyek.proyek})}"
+              >Update Proyek</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+  </body>
+</html>

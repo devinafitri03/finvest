@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Tambah Company</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Perusahaan</h2>
+                <br>
+                <form th:action="@{/company/add}" th:object="${company}" method="POST">
+                    Kode Perusahaan: <br>
+                    <input class="form-control" type="number" name="uuid"/>
+                    <br>
+ 
+                    Nama Perusahaan: <br>
+                    <input required class="form-control" type="text" name="nama"/>
+                    <br>
+ 
+                    Tahun Berdiri: <br>
+                    <input required class="form-control" type="text" name="tahun_berdiri"/>
+                    <br>
+ 
+                    Kategori Bisnis: 
+                    <select name="kategori" class="form-control">
+                        <option selected value="">--Pilih Kategori--</option>
+                        <option th:each="kategori : ${listKategori}"
+                                th:value="${kategori.uuid}"
+                                th:text="${kategori.nama}">
+                        </option>
+                    </select>
+                    <br>
+ 
+                    Subkategori Bisnis: <br>
+                    <select name="subkategori" class="form-control">
+                        <option selected value="">--Pilih Subkategori--</option>
+                        <option th:each="subkategori : ${listSubkategori}"
+                                th:value="${subkategori.uuid}"
+                                th:text="${subkategori.nama}">
+                            </option>
+                    </select>
+                    <br>
+ 
+                    Perusahaan Induk: <br>
+                    <input class="form-control" type="number" name="perusahaan_induk" />
+                    <br>
+ 
+                    Saldo Perusahaan: <br>
+                    <input required class="form-control" type="number" name="saldo_perusahaan" />
+                    <br>
+
+                    Status Perusahaan : 
+                    <select name="statusPerusahaan">
+                        <option value="1">Active</option>
+                        <option value="2">Merged</option>
+                        <option value="3">Bankrupt</option>
+                    </select>
+                    <br><br>
+ 
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+
+</html>

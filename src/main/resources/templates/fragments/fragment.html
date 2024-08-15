@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Finvest</title>
+
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    </head>
+
+    <head th:fragment="js">
+      <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+  </head>
+  <body>
+    <nav
+      th:fragment="navbar"
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: #d2daff"
+    >
+      <a class="navbar-brand font-weight-bold" href="/">Finvest</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" th:classappend="${onevar == 'home'} ? active">
+            <a class="nav-link" th:href="@{/}">Beranda</a>
+          </li>
+          <li class="nav-item" th:classappend="${onevar == 'user'} ? active">
+            <a class="nav-link" th:href="@{/user}">User</a>
+          </li>
+          <li class="nav-item" th:classappend="${onevar == 'company'} ? active">
+            <a class="nav-link" th:href="@{/company}">Company</a>
+          </li>
+          <li class="nav-item" th:classappend="${onevar == 'proyek'} ? active">
+            <a class="nav-link" th:href="@{/projects}">Proyek</a>
+          </li>
+          <li
+            class="nav-item"
+            th:classappend="${onevar == 'investasi'} ? active"
+          >
+            <a class="nav-link" th:href="@{/investasi}">Investasi</a>
+          </li>
+          <li
+            class="nav-item"
+            th:classappend="${onevar == 'dashboard'} ? active"
+          >
+            <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+          </li>
+          <li class="nav-item" th:classappend="${onevar == 'logout'} ? active">
+            <a class="nav-link" th:href="@{/logout}">Keluar</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <footer th:fragment="footer" class="text-left text-black">
+      <section class="footer">
+        <div class="box-container">
+          <div class="box">
+            <div class="box">
+              <a href="#"> <i class="fas fa-chevron-right"></i> Beranda</a>
+              <a href="#"> <i class="fas fa-chevron-right"></i> Perusahaan</a>
+              <a href="#"> <i class="fas fa-chevron-right"></i> Proyek</a>
+              <a href="#"> <i class="fas fa-chevron-right"></i> Keuangan</a>
+              <a href="#"> <i class="fas fa-chevron-right"></i> Investasi</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>Tentang</h3>
+            <p>
+              Finvest adalah sistem informasi yang meningkatkan efisiensi
+              laporan keuangan hingga ke anak-anak perusahaannya, yang nantinya
+              diharapkan dapat berguna juga dalam pengambilan keputusan ekspansi
+              bisnis. Selain itu, sistem ini juga menjadi jembatan antara
+              perusahaan dan investor.
+            </p>
+          </div>
+
+          <div class="box">
+            <h3>Contact Info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +123-456-7890</a>
+            <a href="#"> <i class="fas fa-phone"></i> +111-222-333</a>
+            <a href="#"> <i class="fas fa-envelope"></i> finvest@gmail.com</a>
+            <a href="#">
+              <i class="fas fa-map-marker-alt"></i> Indonesia - Jakarta
+              Selatan</a
+            >
+          </div>
+
+          <div class="box">
+            <h3>Follow Us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="#"> <i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#"> <i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#"> <i class="fab fa-linkedin"></i> Linkedin</a>
+          </div>
+        </div>
+      </section>
+      <div class="text-center">Copyright © Finvest - 2024</div>
+    </footer>
+  </body>
+</html>
